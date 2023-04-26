@@ -1,0 +1,15 @@
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\bin\Debug\net6.0\RecipeApp_Cons.exe
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\bin\Debug\net6.0\RecipeApp_Cons.deps.json
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\bin\Debug\net6.0\RecipeApp_Cons.runtimeconfig.json
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\bin\Debug\net6.0\RecipeApp_Cons.dll
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\bin\Debug\net6.0\RecipeApp_Cons.pdb
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.csproj.AssemblyReference.cache
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.AssemblyInfoInputs.cache
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.AssemblyInfo.cs
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.csproj.CoreCompileInputs.cache
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.dll
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\refint\RecipeApp_Cons.dll
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.pdb
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\RecipeApp_Cons.genruntimeconfig.cache
+C:\Users\Shwa\Documents\PROG POE\RecipeAPP_PROG\RecipeApp_Cons\RecipeApp_Cons\obj\Debug\net6.0\ref\RecipeApp_Cons.dll

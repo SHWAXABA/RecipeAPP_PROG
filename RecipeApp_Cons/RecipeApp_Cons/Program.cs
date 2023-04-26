@@ -1,9 +1,12 @@
 ﻿class Program
 {
+    //By Shwabade Ntsika Xaba
+    //ST10100655
     static void Main(string[] args)
     {
+        
         //Created a recipe object out of the class recipe
-        //The methods will be called from the object class
+        //The methods will be called from the recipe object class
         Recipe recipe = new Recipe();
         while (true)
         {
@@ -39,8 +42,8 @@
                     recipe.ClearRecipe();
                     break;
                 case "6":
-                    Console.WriteLine("Exiting program...");
-                    return;
+                    Environment.Exit(0);
+                    break;
                 default:
                     Console.WriteLine("Invalid choice. Please enter a valid choice.");
                     break;
@@ -113,6 +116,7 @@ class Recipe
         for (int i = 0; i < ingredients.Length; i++)
         {
             Console.WriteLine($"- {amount[i]} {units[i]} of {ingredients[i]}");
+            
         }
 
         // Display the steps

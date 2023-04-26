@@ -32,8 +32,15 @@
                     break;
                 case "3":
                     Console.Write("Enter scaling factor (0.5, 2, or 3): ");
-                    double scale1 = double.Parse(Console.ReadLine());
-                    recipe.ScaleRecipe(scale1);
+                    double scale1;
+                    if (double.TryParse(Console.ReadLine(), out scale1))
+                    {
+                        recipe.ScaleRecipe(scale1);
+                    }
+                    else{
+                        Console.WriteLine("\n+Please Enter a valid number+\n");
+                    }
+                    
                     break;
                 case "4":
                     recipe.ResetQuantities();
@@ -74,39 +81,52 @@ class Recipe
     public void DetailEntry()
     {
         // Prompt the user to enter the number of ingredients
+
         Console.Write("Enter the number of ingredients: ");
-        int ingNum = int.Parse(Console.ReadLine());
-
-        // Initialize the arrays with the correct size
-        ingredients = new string[ingNum];
-        amount = new double[ingNum];
-        units = new string[ingNum];
-
-        // Prompt the user to enter the details for each ingredient
-        for (int i = 0; i < ingNum; i++)
+        //If statement for error handling that will force the user to restart the program
+        int ingNum;
+        if (int.TryParse(Console.ReadLine(), out ingNum))
         {
-            Console.WriteLine($"Enter details for ingredient #{i + 1}:");
-            Console.Write("Name: ");
-            ingredients[i] = Console.ReadLine();
-            Console.Write("Quantity: ");
-            amount[i] = double.Parse(Console.ReadLine());
-            Console.Write("Unit of measurement: ");
-            units[i] = Console.ReadLine();
+            // Initialize the arrays with the correct size
+            ingredients = new string[ingNum];
+            amount = new double[ingNum];
+            units = new string[ingNum];
+
+            // Prompt the user to enter the details for each ingredient
+            for (int i = 0; i < ingNum; i++)
+            {
+                Console.WriteLine($"Enter details for ingredient #{i + 1}:");
+                Console.Write("Name: ");
+                ingredients[i] = Console.ReadLine();
+                Console.Write("Quantity: ");
+                amount[i] = double.Parse(Console.ReadLine());
+                Console.Write("Unit of measurement: ");
+                units[i] = Console.ReadLine();
+            }
+
+            // Prompt the user to enter the number of steps
+            Console.Write("Enter the number of steps: ");
+            int Stnum = int.Parse(Console.ReadLine());
+
+            // Initialize the steps array with the correct size
+            steps = new string[Stnum];
+
+            // Prompt the user to enter the details for each step
+            for (int i = 0; i < Stnum; i++)
+            {
+                Console.Write($"Enter step #{i + 1}: ");
+                steps[i] = Console.ReadLine();
+            }
+
+        }
+        else 
+        { 
+            Console.WriteLine("                                       ");
+            Console.WriteLine("Please Enter a number+\n"); 
+            
         }
 
-        // Prompt the user to enter the number of steps
-        Console.Write("Enter the number of steps: ");
-        int Stnum = int.Parse(Console.ReadLine());
-
-        // Initialize the steps array with the correct size
-        steps = new string[Stnum];
-
-        // Prompt the user to enter the details for each step
-        for (int i = 0; i < Stnum; i++)
-        {
-            Console.Write($"Enter step #{i + 1}: ");
-            steps[i] = Console.ReadLine();
-        }
+        
     }
 
     public void DisplayRecipe()

@@ -67,6 +67,8 @@ class Recipe
     private double[] amount;
     private string[] units;
     private string[] steps;
+    private double[] calories;
+    private string[] foodGroup;
 
     public Recipe()
     {
@@ -74,6 +76,8 @@ class Recipe
         ingredients = new string[0];
         amount = new double[0];
         units = new string[0];
+        calories = new double[0];
+        foodGroup = new string[0];
         steps = new string[0];
 
     }
@@ -84,6 +88,7 @@ class Recipe
 
         Console.Write("Enter the number of ingredients: ");
         //If statement for error handling that will force the user to restart the program
+        //
         int ingNum;
         if (int.TryParse(Console.ReadLine(), out ingNum))
         {
@@ -91,6 +96,8 @@ class Recipe
             ingredients = new string[ingNum];
             amount = new double[ingNum];
             units = new string[ingNum];
+            calories = new double[ingNum];
+            foodGroup = new string[ingNum];
 
             // Prompt the user to enter the details for each ingredient
             for (int i = 0; i < ingNum; i++)
@@ -102,8 +109,14 @@ class Recipe
                 amount[i] = double.Parse(Console.ReadLine());
                 Console.Write("Unit of measurement: ");
                 units[i] = Console.ReadLine();
-            }
+                Console.Write("Number of Calories: ");
+                calories[i]= double.Parse(Console.ReadLine());
+                Console.Write("Food Group: ");
+                foodGroup[i] = Console.ReadLine();
+                
 
+            }
+            
             // Prompt the user to enter the number of steps
             Console.Write("Enter the number of steps: ");
             int Stnum = int.Parse(Console.ReadLine());
@@ -117,7 +130,7 @@ class Recipe
                 Console.Write($"Enter step #{i + 1}: ");
                 steps[i] = Console.ReadLine();
             }
-
+            
         }
         else 
         { 
@@ -135,16 +148,30 @@ class Recipe
         Console.WriteLine("Ingredients:");
         for (int i = 0; i < ingredients.Length; i++)
         {
-            Console.WriteLine($"- {amount[i]} {units[i]} of {ingredients[i]}");
+            Console.WriteLine($"- {amount[i]} {units[i]} of {ingredients[i]} at {calories[i]} Calories, Food Group: {foodGroup[i]}");
             
         }
-
+        //Displays the total number of Calories in the recipe
+        Console.WriteLine("Total Calories :");
+        double result = 0;
+        for(int i = 0; i < calories.Length; i++)
+        {
+            result += calories[i];
+        }
+        Console.WriteLine(result);
+        //Condition for if the calorie amount goes over 300
+        if (result > 300)
+        {
+            Console.WriteLine("!!!-TOTAL CALORIES EXCEED 300-!!!");
+        }
         // Display the steps
         Console.WriteLine("Steps:");
         for (int i = 0; i < steps.Length; i++)
         {
             Console.WriteLine($"- {steps[i]}");
         }
+        
+       
     }
 
     public void ScaleRecipe(double scale)

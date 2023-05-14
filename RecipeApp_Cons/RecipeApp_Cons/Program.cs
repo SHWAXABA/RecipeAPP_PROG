@@ -1,12 +1,102 @@
-﻿class Program
+﻿using System.Collections;
+
+class Program
 {
     //By Shwabade Ntsika Xaba
     //ST10100655
     static void Main(string[] args)
     {
-        
+       
+        AppMenu menu = new AppMenu();
+        menu.appMenu();
+
+    }
+}
+
+
+
+class recipeLogger
+{
+    private Dictionary<string, Recipe> recipeDictionary = new Dictionary<string, Recipe>();
+
+    public void LogDetails()
+    {
+        Console.Write("Enter number of recipes:");
+        int repNum;
+        if (int.TryParse(Console.ReadLine(), out repNum))
+        {
+            for (int i = 0; i < repNum; i++)
+            {
+                Console.Write("Enter Recipe Name:");
+                string repName = Console.ReadLine();
+                Recipe recipe = new Recipe();
+                recipe.DetailEntry();
+                recipeDictionary.Add(repName, recipe);
+            }
+
+            string ans;
+            do
+            {
+                Console.WriteLine("Display Ingredients and steps? (Y/N)");
+                ans = Console.ReadLine();
+                switch (ans)
+                {
+                    case "Y":
+                        foreach (var recipeEntry in recipeDictionary)
+                        {
+                            Console.WriteLine($"Recipe Name: {recipeEntry.Key}");
+                            recipeEntry.Value.DisplayRecipe();
+                        }
+                        break;
+                    case "N":
+                        // Assuming menu.appMenu() is part of the AppMenu class
+                        AppMenu menu = new AppMenu();
+                        menu.appMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Please select a valid input");
+                        break;
+                }
+            } while (ans != "N");
+        }
+        else
+        {
+            Console.WriteLine("Please enter a number");
+        }
+    }
+
+    public void recipeList()
+    {
+        foreach (var recipeEntry in recipeDictionary)
+        {
+            Console.WriteLine($"Recipe Name: {recipeEntry.Key}");
+        }
+    }
+
+    public void chooseRecipe()
+    {
+        Console.Write("Please enter the name of the recipe: ");
+        string recipeName = Console.ReadLine();
+        if (recipeDictionary.ContainsKey(recipeName))
+        {
+            Console.WriteLine($"Recipe Name: {recipeName}");
+            recipeDictionary[recipeName].DisplayRecipe();
+        }
+        else
+        {
+            Console.WriteLine("Recipe does not exist");
+        }
+    }
+}
+
+//The following class leads ito the Ingredient creating Menu
+class IngMenu
+{
+    public IngMenu() {
         //Created a recipe object out of the class recipe
         //The methods will be called from the recipe object class
+       
+        AppMenu appMenu = new AppMenu();
         Recipe recipe = new Recipe();
         while (true)
         {
@@ -16,7 +106,7 @@
             Console.WriteLine("Enter '3' to scale recipe");
             Console.WriteLine("Enter '4' to reset quantities");
             Console.WriteLine("Enter '5' to clear recipe");
-            Console.WriteLine("Enter '6' to exit");
+            Console.WriteLine("Enter '6' for Main Menu");
             Console.WriteLine("===================================");
             //These switch cases allow for the selection of each option
             string ans = Console.ReadLine();
@@ -37,10 +127,11 @@
                     {
                         recipe.ScaleRecipe(scale1);
                     }
-                    else{
+                    else
+                    {
                         Console.WriteLine("\n+Please Enter a valid number+\n");
                     }
-                    
+
                     break;
                 case "4":
                     recipe.ResetQuantities();
@@ -49,13 +140,15 @@
                     recipe.ClearRecipe();
                     break;
                 case "6":
-                    Environment.Exit(0);
+                    appMenu.appMenu();
                     break;
                 default:
                     Console.WriteLine("Invalid choice. Please enter a valid choice.");
                     break;
             }
         }
+
+
     }
 }
 
@@ -105,22 +198,42 @@ class Recipe
                 Console.WriteLine($"Enter details for ingredient #{i + 1}:");
                 Console.Write("Name: ");
                 ingredients[i] = Console.ReadLine();
-                Console.Write("Quantity: ");
-                amount[i] = double.Parse(Console.ReadLine());
+                do
+                { 
+                    Console.Write("Quantity: ");
+                }
+                while (!double.TryParse(Console.ReadLine(),out amount[i]));
                 Console.Write("Unit of measurement: ");
                 units[i] = Console.ReadLine();
-                Console.Write("Number of Calories: ");
-                calories[i]= double.Parse(Console.ReadLine());
+                do {
+                    Console.Write("Number of Calories: ");
+                }
+                while (!double.TryParse(Console.ReadLine(), out calories[i]));
                 Console.Write("Food Group: ");
                 foodGroup[i] = Console.ReadLine();
                 
 
             }
-            
-            // Prompt the user to enter the number of steps
-            Console.Write("Enter the number of steps: ");
-            int Stnum = int.Parse(Console.ReadLine());
+            Console.Write("TOTAL CALORIES: ");
+            double result = 0;
+            for (int i = 0; i < calories.Length; i++)
+            {
+                result += calories[i];
+            }
+            Console.WriteLine(result);
+            //Condition for if the calorie amount goes over 300
+            if (result > 300)
+            {
+                Console.WriteLine("!!!-TOTAL CALORIES EXCEED 300-!!!");
+            }
 
+            // Prompt the user to enter the number of steps
+            int Stnum;
+            do
+            {
+                Console.Write("Enter the number of steps: ");
+            } while (!int.TryParse(Console.ReadLine(), out Stnum));
+            
             // Initialize the steps array with the correct size
             steps = new string[Stnum];
 
@@ -199,5 +312,52 @@ class Recipe
         amount = new double[0];
         units = new string[0];
         steps = new string[0];
+    }
+}
+class AppMenu
+{
+    public void appMenu()
+    {
+        recipeLogger rep = new recipeLogger();
+        while (true)
+        {
+            Console.WriteLine("========================================================================================");
+            string art = @"
+██████╗ ███████╗ ██████╗██╗██████╗ ███████╗     █████╗ ██████╗ ██████╗ 
+██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝    ██╔══██╗██╔══██╗██╔══██╗
+██████╔╝█████╗  ██║     ██║██████╔╝█████╗      ███████║██████╔╝██████╔╝
+██╔══██╗██╔══╝  ██║     ██║██╔═══╝ ██╔══╝      ██╔══██║██╔═══╝ ██╔═══╝ 
+██║  ██║███████╗╚██████╗██║██║     ███████╗    ██║  ██║██║     ██║     
+╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝     ╚══════╝    ╚═╝  ╚═╝╚═╝     ╚═╝     
+                                                                        ";
+
+            Console.WriteLine(art);
+            Console.WriteLine("========================================================================================");
+            Console.WriteLine("1) Create Recipe");
+            Console.WriteLine("2) Find Recipe");
+            Console.WriteLine("3) Display All Recipes");
+            Console.WriteLine("4) Exit App");
+            Console.WriteLine("========================================================================================");
+            Console.Write("Please Select Option:");
+            string ans = Console.ReadLine();
+            switch (ans)
+            {
+                case "1":
+                    rep.LogDetails();
+                    break;
+                case "2":
+                    rep.chooseRecipe();
+                    break;
+                case "3":
+                    rep.recipeList();
+                    break;
+                case "4":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Please select Valid input");
+                    break;
+            }
+        }
     }
 }

@@ -6,8 +6,10 @@ class Program
     //ST10100655
     static void Main(string[] args)
     {
-       
-        AppMenu menu = new AppMenu();
+        //first the dictionary is created before we then pass it to the Appmenu class
+        //then the Appmenu method gives us our options for our recipe app
+        Dictionary<string, Recipe> recipeDictionary = new Dictionary<string, Recipe>();
+        AppMenu menu = new AppMenu(recipeDictionary);
         menu.appMenu();
 
     }
@@ -15,9 +17,15 @@ class Program
 
 
 
-class recipeLogger
+class RecipeLogger
 {
-    private Dictionary<string, Recipe> recipeDictionary = new Dictionary<string, Recipe>();
+    //this turns our dictionary into a private class that is shared amongst other classes
+    private Dictionary<string, Recipe> recipeDictionary;
+    //creates a public recipeLogger method for us to call within this class
+    public RecipeLogger(Dictionary<string, Recipe> recipeDictionary)
+    {
+        this.recipeDictionary = recipeDictionary;
+    }
 
     public void LogDetails()
     {
@@ -50,7 +58,7 @@ class recipeLogger
                         break;
                     case "N":
                         // Assuming menu.appMenu() is part of the AppMenu class
-                        AppMenu menu = new AppMenu();
+                        AppMenu menu = new AppMenu(recipeDictionary);
                         menu.appMenu();
                         break;
                     default:
@@ -92,11 +100,13 @@ class recipeLogger
 //The following class leads ito the Ingredient creating Menu
 class IngMenu
 {
-    public IngMenu() {
+    //We call the dictionary and make it private
+    private Dictionary<string, Recipe> recipeDictionary;
+    public IngMenu(Dictionary<string, Recipe> recipeDictionary) {
         //Created a recipe object out of the class recipe
         //The methods will be called from the recipe object class
-       
-        AppMenu appMenu = new AppMenu();
+
+        this.recipeDictionary = recipeDictionary;
         Recipe recipe = new Recipe();
         while (true)
         {
@@ -140,6 +150,7 @@ class IngMenu
                     recipe.ClearRecipe();
                     break;
                 case "6":
+                    AppMenu appMenu = new AppMenu(recipeDictionary);
                     appMenu.appMenu();
                     break;
                 default:
@@ -214,15 +225,10 @@ class Recipe
                 
 
             }
-            Console.Write("TOTAL CALORIES: ");
-            double result = 0;
-            for (int i = 0; i < calories.Length; i++)
-            {
-                result += calories[i];
-            }
-            Console.WriteLine(result);
-            //Condition for if the calorie amount goes over 300
-            if (result > 300)
+            //Delegation is used to call the calories function in order to check if the total calories exceed 300
+            double calExceed = totalCalories(calories);
+            Console.WriteLine("TOTAL CALORIES: " + calExceed);
+            if (calExceed > 300)
             {
                 Console.WriteLine("!!!-TOTAL CALORIES EXCEED 300-!!!");
             }
@@ -254,7 +260,15 @@ class Recipe
 
         
     }
-
+    public double totalCalories(double[]calories)
+    {
+        double result = 0;
+        for (int i = 0; i < calories.Length; i++)
+        {
+            result += calories[i];
+        }
+        return result;
+    }
     public void DisplayRecipe()
     {
         // Display the ingredients and quantities
@@ -316,9 +330,16 @@ class Recipe
 }
 class AppMenu
 {
+    private Dictionary<string, Recipe> recipeDictionary;
+    private RecipeLogger rep;
+    public AppMenu(Dictionary<string, Recipe> recipeDictionary)
+    {
+        this.recipeDictionary = recipeDictionary;
+        rep = new RecipeLogger(recipeDictionary);
+    }
     public void appMenu()
     {
-        recipeLogger rep = new recipeLogger();
+        
         while (true)
         {
             Console.WriteLine("========================================================================================");

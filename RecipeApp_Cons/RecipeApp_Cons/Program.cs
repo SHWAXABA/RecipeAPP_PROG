@@ -165,7 +165,7 @@ class IngMenu
 
 //the following class will calculate all of requirements using different methods
 // The methods will then be called by the main statement
-class Recipe
+public class Recipe
 {
     private string[] ingredients;
     private double[] amount;
